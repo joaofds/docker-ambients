@@ -1,6 +1,4 @@
-FROM postgres:9.6.5
-
-MAINTAINER Daniel Nogueira <danielnogueira.dev@gmail.com>
+FROM postgres:11.7-alpine
 
 #-----------------------------------------------------------------------------------------------#
 # Ajusta a configuração do PostgreSQL para ser possível fazer conexão remota ao banco de dados. #

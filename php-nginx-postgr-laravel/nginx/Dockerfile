@@ -1,5 +1,3 @@
-FROM nginx:1.13.3
-
-MAINTAINER Daniel Nogueira <danielnogueira.dev@gmail.com>
+FROM nginx:1.16.1
 
 EXPOSE 80 443

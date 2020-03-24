@@ -1,6 +1,4 @@
-FROM php:7.1.9-fpm
- 
-MAINTAINER Daniel Nogueira <danielnogueira.dev@gmail.com>
+FROM php:7.4-fpm
 
 # Additional tools
 RUN apt-get update \
