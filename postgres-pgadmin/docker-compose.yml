@@ -1,29 +1,33 @@
 version: '3'
 
 services:
-  klios-postgres-compose:
+  postgresql:
+    container_name: postgresql
     image: postgres:11.7-alpine
     environment:
-      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "klios"
+      POSTGRES_USER: "default"
+      POSTGRES_PASSWORD: "secret"
     ports:
-      - "15432:5432"
+      - "5432:5432"
     volumes:
-      - /home/joaofds/PostgreSQL:/var/lib/postgresql/data 
+      - ./postgres/data:/var/lib/postgresql/data 
     networks:
-      - postgres-compose-network
+      - postgres-network
       
-  klios-pgadmin-compose:
+  pgadmin4:
+    container_name: pgadmin4
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: "jo4o.fds@gmail.com"
+      PGADMIN_DEFAULT_EMAIL: "jo4o.fds@gmail.com"r
       PGADMIN_DEFAULT_PASSWORD: "postgres"
     ports:
       - "16543:80"
     depends_on:
-      - klios-postgres-compose
+      - postgresql
     networks:
-      - postgres-compose-network
+      - postgres-network
 
 networks: 
-  postgres-compose-network:
+  postgres-network:
     driver: bridge
