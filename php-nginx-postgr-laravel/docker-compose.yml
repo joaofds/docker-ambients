@@ -7,7 +7,7 @@ services:
             context: ./nginx
             dockerfile: Dockerfile
         volumes:
-            - ${APPLICATION}:/var/www/html
+            - ${APPLICATION}:/var/www/html:rw
             - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
             - ${NGINX_SITES_PATH}:/etc/nginx/conf.d
         ports:
@@ -16,7 +16,7 @@ services:
         links:
             - php-fpm
         networks:
-            - code-network
+            - dev
 
     php-fpm:
         container_name: php-fpm
@@ -47,10 +47,10 @@ services:
         volumes:
             - ${APPLICATION}:/var/www/html
         networks:
-            - code-network
+            - dev
 
     postgres:
-        container_name: postgresql
+        container_name: postgres11.7
         build:
             context: ./postgresql
             dockerfile: Dockerfile
@@ -63,8 +63,8 @@ services:
             - POSTGRES_USER=${POSTGRES_USER}
             - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
         networks:
-            - code-network
+            - dev
 
 networks:
-    code-network:
+    dev:
         driver: bridge
